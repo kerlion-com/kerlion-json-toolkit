@@ -1,6 +1,6 @@
 # KERLION JSON Toolkit
 
-A privacy-first JSON workspace for developers that runs entirely in the browser.
+A privacy-first JSON workspace for developers that runs entirely in the browser.\n\n**Latest release:** [v1.0.0](https://github.com/kerlion-com/kerlion-json-toolkit/releases/tag/v1.0.0)
 
 ## Features
 
