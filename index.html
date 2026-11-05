@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="KERLION JSON Toolkit — أداة JSON تعمل داخل المتصفح لتنسيق JSON والتحقق منه وإصلاحه واستعراضه ومقارنته واختباره عبر JSONPath.">
+  <meta name="theme-color" content="#f5f7fa">
+  <title>KERLION JSON Toolkit</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="#" aria-label="KERLION JSON Toolkit">
+      <span class="brand-mark">K</span>
+      <span><strong>KERLION</strong><small>JSON Toolkit</small></span>
+    </a>
+    <div class="header-actions">
+      <button class="icon-btn" id="languageToggle" type="button" aria-label="Switch language">EN</button>
+      <button class="icon-btn" id="themeToggle" type="button" aria-label="Switch theme">☾</button>
+    </div>
+  </div>
+</header>
+<main>
+  <section class="hero">
+    <div class="container">
+      <span class="eyebrow" data-i18n="eyebrow">أدوات JSON للمطورين</span>
+      <h1 data-i18n="heroTitle">KERLION JSON Toolkit</h1>
+      <p data-i18n="heroText">مساحة عمل سريعة وخصوصية-أولًا للتعامل مع JSON مباشرة داخل المتصفح، دون خادم أو API.</p>
+      <div class="trust-row">
+        <span data-i18n="localProcessing">المعالجة محليًا داخل المتصفح</span>
+        <span data-i18n="noBackend">لا يوجد Backend</span>
+        <span data-i18n="noLibraries">بدون مكتبات خارجية</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="workspace container">
+    <nav class="tool-nav" aria-label="JSON tools">
+      <button class="tool-tab active" data-tab="editor" data-i18n="tabEditor">المحرر</button>
+      <button class="tool-tab" data-tab="tree" data-i18n="tabTree">شجرة JSON</button>
+      <button class="tool-tab" data-tab="diff" data-i18n="tabDiff">المقارنة</button>
+      <button class="tool-tab" data-tab="path" data-i18n="tabPath">JSONPath</button>
+      <button class="tool-tab" data-tab="stats" data-i18n="tabStats">الإحصائيات</button>
+    </nav>
+
+    <section class="panel tab-panel active" id="panel-editor">
+      <div class="panel-head">
+        <div><h2 data-i18n="editorTitle">محرر JSON</h2><p data-i18n="editorSubtitle">ألصق JSON أو اسحب ملفًا ثم استخدم الأدوات المتاحة.</p></div>
+        <div class="status" id="validationStatus" aria-live="polite"></div>
+      </div>
+      <div class="toolbar">
+        <button class="btn primary" id="formatBtn" data-i18n="format">تنسيق</button>
+        <button class="btn" id="minifyBtn" data-i18n="minify">تصغير</button>
+        <button class="btn" id="validateBtn" data-i18n="validate">تحقق</button>
+        <button class="btn" id="repairBtn" data-i18n="repair">إصلاح</button>
+        <button class="btn" id="pasteBtn" data-i18n="paste">لصق</button>
+        <button class="btn danger" id="clearBtn" data-i18n="clear">مسح</button>
+      </div>
+      <div class="drop-zone" id="dropZone" tabindex="0" role="button" aria-controls="fileInput">
+        <input id="fileInput" type="file" accept=".json,application/json" hidden>
+        <strong data-i18n="dropTitle">اسحب ملف JSON هنا</strong>
+        <span data-i18n="dropText">أو اضغط لاختيار ملف من جهازك</span>
+      </div>
+      <label class="field-label" for="jsonInput" data-i18n="inputLabel">JSON المدخل</label>
+      <textarea id="jsonInput" class="code-editor" spellcheck="false" data-i18n-placeholder="inputPlaceholder" placeholder='مثال: {"name":"KERLION","version":1}'></textarea>
+      <div id="messageBox" class="message hidden" role="status" aria-live="polite"></div>
+      <div class="result-head">
+        <label class="field-label" for="resultOutput" data-i18n="outputLabel">النتيجة</label>
+        <div class="result-actions">
+          <button class="btn small" id="copyBtn" data-i18n="copy">نسخ</button>
+          <button class="btn small" id="downloadBtn" data-i18n="download">تنزيل JSON</button>
+        </div>
+      </div>
+      <pre id="resultOutput" class="result-output"></pre>
+    </section>
+
+    <section class="panel tab-panel" id="panel-tree">
+      <div class="panel-head">
+        <div><h2 data-i18n="treeTitle">شجرة JSON</h2><p data-i18n="treeSubtitle">استعرض الكائنات والمصفوفات والقيم بشكل هرمي.</p></div>
+        <button class="btn small" id="treeExpandBtn" data-i18n="expandAll">توسيع الكل</button>
+      </div>
+      <div id="treeOutput" class="tree-output"></div>
+    </section>
+
+    <section class="panel tab-panel" id="panel-diff">
+      <div class="panel-head"><div><h2 data-i18n="diffTitle">مقارنة JSON</h2><p data-i18n="diffSubtitle">قارن بين مستندين JSON واعرف المسارات التي تغيّرت.</p></div></div>
+      <div class="split-grid">
+        <div><label class="field-label" for="diffA" data-i18n="jsonA">JSON A</label><textarea id="diffA" class="code-editor compact" spellcheck="false"></textarea></div>
+        <div><label class="field-label" for="diffB" data-i18n="jsonB">JSON B</label><textarea id="diffB" class="code-editor compact" spellcheck="false"></textarea></div>
+      </div>
+      <button class="btn primary" id="diffBtn" data-i18n="compare">مقارنة</button>
+      <div id="diffOutput" class="diff-output" aria-live="polite"></div>
+    </section>
+
+    <section class="panel tab-panel" id="panel-path">
+      <div class="panel-head"><div><h2 data-i18n="pathTitle">JSONPath Tester</h2><p data-i18n="pathSubtitle">اختبر مسارات JSON بسيطة على محتوى المحرر الحالي.</p></div></div>
+      <div class="path-row">
+        <input id="jsonPathInput" class="text-input" data-i18n-placeholder="pathPlaceholder" placeholder="مثال: $.users[0].name">
+        <button class="btn primary" id="pathBtn" data-i18n="runPath">تشغيل</button>
+      </div>
+      <div class="path-examples" data-i18n="pathExamples">يدعم: $، الخصائص بالنقطة، [index]، ["property"]، و *.</div>
+      <pre id="pathOutput" class="result-output"></pre>
+    </section>
+
+    <section class="panel tab-panel" id="panel-stats">
+      <div class="panel-head"><div><h2 data-i18n="statsTitle">إحصائيات JSON</h2><p data-i18n="statsSubtitle">ملخص سريع لبنية JSON الحالية.</p></div></div>
+      <div class="stats-grid">
+        <article class="stat-card"><span data-i18n="objects">الكائنات</span><strong id="statObjects">0</strong></article>
+        <article class="stat-card"><span data-i18n="arrays">المصفوفات</span><strong id="statArrays">0</strong></article>
+        <article class="stat-card"><span data-i18n="keys">المفاتيح</span><strong id="statKeys">0</strong></article>
+        <article class="stat-card"><span data-i18n="leaves">القيم النهائية</span><strong id="statLeaves">0</strong></article>
+        <article class="stat-card"><span data-i18n="depth">أقصى عمق</span><strong id="statDepth">0</strong></article>
+        <article class="stat-card"><span data-i18n="characters">الأحرف</span><strong id="statCharacters">0</strong></article>
+      </div>
+    </section>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div><strong>KERLION JSON Toolkit</strong><p data-i18n="footerText">أداة JSON محلية ومفتوحة المصدر للمطورين.</p></div>
+    <div class="footer-links"><a href="https://www.kerlionvip.com" target="_blank" rel="noopener noreferrer">KERLION</a><a href="https://github.com/kerlion-com/kerlion-json-toolkit" target="_blank" rel="noopener noreferrer">GitHub</a></div>
+  </div>
+</footer>
+</body>
+</html>
