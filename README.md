@@ -4,6 +4,10 @@ A privacy-first JSON workspace for developers that runs entirely in the browser.
 
 **Latest release:** [v1.0.0](https://github.com/kerlion-com/kerlion-json-toolkit/releases/tag/v1.0.0)
 
+## Arabic Usage Guide
+
+Prefer instructions in Arabic? Read the [Arabic project and usage guide](https://www.kerlionvip.com/2026/11/kerlion-json-toolkit.html) for an explanation of the toolkit and how to use its features.
+
 ## Features
 
 - JSON Formatter and Minifier
