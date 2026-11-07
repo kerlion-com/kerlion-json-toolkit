@@ -2,6 +2,10 @@
 
 A privacy-first JSON workspace for developers that runs entirely in the browser.
 
+<p align="center">
+  <img src="assets/kerlion-json-toolkit-social.png" alt="KERLION JSON Toolkit social preview" width="100%">
+</p>
+
 **Latest release:** [v1.0.0](https://github.com/kerlion-com/kerlion-json-toolkit/releases/tag/v1.0.0)
 
 ## Arabic Usage Guide
@@ -64,7 +68,8 @@ kerlion-json-toolkit/
 ├── README.md
 ├── LICENSE
 └── assets/
-    └── favicon.svg
+    ├── favicon.svg
+    └── kerlion-json-toolkit-social.png
 ```
 
 ## License
